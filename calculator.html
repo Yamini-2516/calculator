@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Basic Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #8ab0d5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      background: rgb(39, 105, 115);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .calculator input {
+      width: 100px;
+      padding: 0.5rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .buttons button {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #5f84ab;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .buttons button:hover {
+      background: #8fc1f7;
+    }
+
+    .result {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <h2>Basic Calculator</h2>
+    <input type="number" id="num1" placeholder="First Number" />
+    <input type="number" id="num2" placeholder="Second Number" />
+
+    <div class="buttons">
+      <button onclick="calculate('+')">Add (+)</button>
+      <button onclick="calculate('-')">Subtract (-)</button>
+      <button onclick="calculate('*')">Multiply (×)</button>
+      <button onclick="calculate('/')">Divide (÷)</button>
+    </div>
+
+    <div class="result" id="result">Result will appear here</div>
+  </div>
+
+  <script>
+    function calculate(operator) {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultDiv.textContent = "Please enter valid numbers.";
+        return;
+      }
+
+      let result;
+      switch (operator) {
+        case '+':
+          result = num1 + num2;
+          break;
+        case '-':
+          result = num1 - num2;
+          break;
+        case '*':
+          result = num1 * num2;
+          break;
+        case '/':
+          if (num2 === 0) {
+            resultDiv.textContent = "Cannot divide by zero!";
+            return;
+          }
+          result = num1 / num2;
+          break;
+        default:
+          result = "Invalid operation";
+      }
+
+      resultDiv.textContent = `Result: ${result}`;
+    }
+  </script>
+
+</body>
+</html>
